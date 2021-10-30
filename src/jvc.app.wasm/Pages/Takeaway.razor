@@ -1,0 +1,25 @@
+﻿@page "/takeaway"
+
+<h1>Takeaway</h1>
+
+<p>It's time for @choice</p>
+<a href="/">Sweet, thanks! Go back.</a>
+
+@code {
+    private string choice = string.Empty;
+    private string[] takeaways = new string[]
+    {
+        "pho ever",
+        "maccas",
+        "BK",
+        "Hong's",
+        "noodle canteen"
+        };
+
+    protected override async Task OnInitializedAsync()
+    {
+        var random = new Random();
+        int index = random.Next(takeaways.Length);
+        choice = takeaways[index];
+    }
+}
