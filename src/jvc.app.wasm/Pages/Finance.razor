@@ -1,5 +1,6 @@
 ﻿@page "/finance"
-@inject HttpClient Http
+@using jvc.app.wasm.Services
+@inject IFinanceService Service
 
 <h1>Finance</h1>
 <p>@status</p>
@@ -9,6 +10,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        status = await Http.GetStringAsync("/api/finance/status");
+        status = await Service.GetStatusAsync();
     }
 }
