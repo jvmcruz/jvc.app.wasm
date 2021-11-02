@@ -9,6 +9,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        status = await Http.GetStringAsync("https://jvc-app-webapi.herokuapp.com/api/finance/status");
+        status = await Http.GetStringAsync("/api/finance/status");
     }
 }
