@@ -1,4 +1,6 @@
-﻿using System.Net.Http;
+﻿using Microsoft.Extensions.Configuration;
+using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace jvc.app.wasm.Services
@@ -7,13 +9,14 @@ namespace jvc.app.wasm.Services
     {
         HttpClient _httpClient;
 
-        public FinanceService(HttpClient httpClient)
+        public FinanceService(HttpClient httpClient, IConfiguration configuration)
         {
             _httpClient = httpClient;
+            _httpClient.BaseAddress = new Uri(configuration["BaseAddress"]);
         }
 
         public async Task<string> GetStatusAsync()
-        {
+        {   
             return await _httpClient.GetStringAsync("/api/finance/status");
         }
     }
