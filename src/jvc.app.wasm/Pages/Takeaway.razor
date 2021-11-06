@@ -1,25 +1,24 @@
 ﻿@page "/takeaway"
+@inject HttpClient Http
 
 <h1>Takeaway</h1>
 
-<p>It's time for @choice</p>
+<p>It's time for <b>@choice</b></p>
 <a href="">Sweet, thanks! Go back.</a>
 
 @code {
     private string choice = string.Empty;
-    private string[] takeaways = new string[]
-    {
-        "pho ever",
-        "maccas",
-        "BK",
-        "Hong's",
-        "noodle canteen"
-        };
 
     protected override async Task OnInitializedAsync()
     {
+        var takeaways = await Http.GetFromJsonAsync<List<Restaurant>>("sample-data/takeaways.json");
         var random = new Random();
-        int index = random.Next(takeaways.Length);
-        choice = takeaways[index];
+        int index = random.Next(takeaways.Count);
+        choice = takeaways[index].Name;
+    }
+
+    private class Restaurant
+    {
+        public string Name { get; set; }
     }
 }
