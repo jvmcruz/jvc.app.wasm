@@ -1,5 +1,6 @@
 ﻿@page "/takeaway"
 @inject HttpClient Http
+@inject IFileService fileService
 
 <h1>Takeaway</h1>
 
@@ -7,18 +8,19 @@
 <a href="">Sweet, thanks! Go back.</a>
 
 @code {
-    private string choice = string.Empty;
+        private string choice = string.Empty;
 
-    protected override async Task OnInitializedAsync()
-    {
-        var takeaways = await Http.GetFromJsonAsync<List<Restaurant>>("sample-data/takeaways.json");
-        var random = new Random();
-        int index = random.Next(takeaways.Count);
-        choice = takeaways[index].Name;
-    }
+        protected override async Task OnInitializedAsync()
+        {
+            var takeaways = await Http.GetFromJsonAsync<List<Restaurant>>("sample-data/takeaways.json");
+            var random = new Random();
+            int index = random.Next(takeaways.Count);
+            choice = takeaways[index].Name;
+            fileService.WriteToFile("test");
+        }
 
-    private class Restaurant
-    {
-        public string Name { get; set; }
-    }
+        private class Restaurant
+        {
+            public string Name { get; set; }
+        }
 }
