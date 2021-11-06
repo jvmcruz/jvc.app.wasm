@@ -1,6 +1,6 @@
 [
   {
-    "name": "Pho ever"
+    "name": "Pho Ever"
   },
   {
     "name": "Maccas"
@@ -12,12 +12,30 @@
     "name": "Hong's"
   },
   {
-    "name": "Noodle canteen"
+    "name": "Noodle Canteen"
   },
   {
     "name": "Tony's"
   },
   {
     "name": "Pizza Hut"
+  },
+  {
+    "name": "Kebab"
+  },
+  {
+    "name": "Kiwi Roast"
+  },
+  {
+    "name": "Hapunan"
+  },
+  {
+    "name": "Whatever's at Beerspot"
+  },
+  {
+    "name": "Thai"
+  },
+  {
+    "name": "Malaysian"
   }
 ]
