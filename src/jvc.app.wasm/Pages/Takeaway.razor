@@ -1,25 +1,27 @@
 ﻿@page "/takeaway"
+@inject HttpClient Http
+@inject ITakeawayService takeawayService
 
 <h1>Takeaway</h1>
 
-<p>It's time for @choice</p>
-<a href="">Sweet, thanks! Go back.</a>
+@if (string.IsNullOrEmpty(choice))
+{
+    <p>Doing super maths...</p>
+}
+else
+{
+    <p>It's time for <b>@choice</b></p>
+    <a href="">Sweet, thanks! Go back.</a>
+}
 
 @code {
     private string choice = string.Empty;
-    private string[] takeaways = new string[]
-    {
-        "pho ever",
-        "maccas",
-        "BK",
-        "Hong's",
-        "noodle canteen"
-        };
 
     protected override async Task OnInitializedAsync()
     {
+        var takeaways = await takeawayService.GetTakeaways();
         var random = new Random();
-        int index = random.Next(takeaways.Length);
-        choice = takeaways[index];
+        int index = random.Next(takeaways.Count);
+        choice = takeaways[index].Name;
     }
 }
