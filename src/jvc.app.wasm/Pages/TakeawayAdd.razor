@@ -1,0 +1,31 @@
+﻿@page "/addtakeaway"
+@inject ITakeawayService takeawayService
+
+<h1>Add Takeaway</h1>
+
+@if (!success)
+{
+    <EditForm Model="@takeaway" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <InputText id="name" @bind-Value="takeaway.Name" />
+
+        <button type="submit">Submit</button>
+    </EditForm>
+}
+else
+{
+    <p>Added <b>@takeaway.Name</b> successfully</p>
+    <a href="">Go back.</a>
+}
+
+@code {
+    private TakeawayDto takeaway = new TakeawayDto();
+    private bool success = false;
+
+    private async Task HandleValidSubmit()
+    {
+        success = await takeawayService.AddTakeaway(takeaway);
+    }
+}

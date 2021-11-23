@@ -8,5 +8,6 @@ namespace jvc.app.wasm.Services
     {
         Task<string> GetStatus();
         Task<List<TakeawayDto>> GetTakeaways();
+        Task<bool> AddTakeaway(TakeawayDto takeaway);
     }
 }

@@ -10,6 +10,7 @@ namespace jvc.app.wasm.Services
 {
     public class TakeawayService : ITakeawayService
     {
+        private const string Takeaways = "/api/values/takeaways";
         HttpClient _httpClient;
 
         public TakeawayService(HttpClient httpClient, IConfiguration configuration)
@@ -25,7 +26,13 @@ namespace jvc.app.wasm.Services
 
         public async Task<List<TakeawayDto>> GetTakeaways()
         {
-            return await _httpClient.GetFromJsonAsync<List<TakeawayDto>>("/api/values/takeaways");
+            return await _httpClient.GetFromJsonAsync<List<TakeawayDto>>(Takeaways);
+        }
+
+        public async Task<bool> AddTakeaway(TakeawayDto takeaway)
+        {
+            var response = await _httpClient.PostAsJsonAsync(Takeaways, takeaway);
+            return response.IsSuccessStatusCode;
         }
     }
 }
