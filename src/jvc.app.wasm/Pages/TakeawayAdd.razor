@@ -3,7 +3,7 @@
 
 <h1>Add Takeaway</h1>
 
-@if (!success)
+@if (!success) //please style this
 {
     <EditForm Model="@takeaway" OnValidSubmit="@HandleValidSubmit">
         <DataAnnotationsValidator />
@@ -26,6 +26,7 @@ else
 
     private async Task HandleValidSubmit()
     {
+        //add auth
         success = await takeawayService.AddTakeaway(takeaway);
     }
 }
